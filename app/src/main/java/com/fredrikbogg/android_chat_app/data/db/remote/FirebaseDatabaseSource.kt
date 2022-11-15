@@ -184,7 +184,6 @@ class FirebaseDataSource {
     fun pushNewMessage(messagesID: String, message: Message) {
         refToPath("messages/$messagesID").push().setValue(message)
     }
-
     //endregion
 
     //region Remove
@@ -285,6 +284,7 @@ class FirebaseDataSource {
         val listener = attachValueListenerToBlock(resultClassName, b)
         refObs.start(listener, refToPath("chats/$chatID"))
     }
+
 
     //endregion
 }

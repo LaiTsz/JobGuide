@@ -15,4 +15,5 @@ class StorageRepository {
             b.invoke(Result.Error(it.message))
         }
     }
+
 }
