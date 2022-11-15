@@ -91,7 +91,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.fredrikbogg.android_chat_app.ui.home.HomeFragment"
+        android:name="com.fredrikbogg.android_chat_app.ui.home.homeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home" >
     <action
