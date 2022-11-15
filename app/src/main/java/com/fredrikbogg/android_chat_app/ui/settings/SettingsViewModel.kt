@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.fredrikbogg.android_chat_app.R
 import com.fredrikbogg.android_chat_app.data.db.entity.UserInfo
 import com.fredrikbogg.android_chat_app.data.db.remote.FirebaseReferenceValueObserver
 import com.fredrikbogg.android_chat_app.data.db.repository.AuthRepository

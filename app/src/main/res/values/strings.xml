@@ -27,6 +27,7 @@
     <string name="change_image">Change Image</string>
     <string name="logout">Logout</string>
     <string name="change_status">Change Status</string>
+    <string name="change_setting">Change Setting</string>
     <string name="create_account">Create account</string>
     <string name="new_friend_request">New friend request</string>
     <string name="login">login</string>

@@ -36,7 +36,8 @@ class SettingsFragment : Fragment() {
             .apply { viewmodel = viewModel }
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
         setHasOptionsMenu(true)
-
+        viewDataBinding.changeSettingButton.setOnClickListener{
+            findNavController().navigate(R.id.action_navigation_settings_changeSettingFragment)}
         return viewDataBinding.root
     }
 
@@ -78,6 +79,8 @@ class SettingsFragment : Fragment() {
                 SharedPreferencesUtil.removeUserID(requireContext())
                 navigateToStart()
             })
+
+
     }
 
     private fun showEditStatusDialog() {
@@ -105,4 +108,5 @@ class SettingsFragment : Fragment() {
     private fun navigateToStart() {
         findNavController().navigate(R.id.action_navigation_settings_to_startFragment)
     }
+
 }

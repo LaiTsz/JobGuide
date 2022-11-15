@@ -23,7 +23,7 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="42dp"
+            android:layout_marginBottom="12dp"
             android:backgroundTint="@color/textError"
             android:onClick="@{() -> viewmodel.logoutUserPressed()}"
             android:text="@string/logout"
@@ -77,9 +77,10 @@
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@id/logoutButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/userImageCardView">
+            app:layout_constraintTop_toBottomOf="@id/userImageCardView"
+            app:layout_constraintVertical_bias="0.0">
 
             <TextView
                 android:id="@+id/nameText"
@@ -93,11 +94,11 @@
 
             <TextView
                 android:id="@+id/statusText"
+                style="@style/MessageSeen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:gravity="center"
-                style="@style/MessageSeen"
                 android:text="@{viewmodel.userInfo.status}"
                 android:textSize="16sp"
                 tools:text="This is a status message" />
@@ -107,7 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="62dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="24dp"
                 android:onClick="@{() -> viewmodel.changeUserImagePressed()}"
                 android:text="@string/change_image"
@@ -123,6 +124,16 @@
                 android:onClick="@{() -> viewmodel.changeUserStatusPressed()}"
                 android:text="@string/change_status"
                 android:textSize="14sp" />
+            <Button
+                android:id="@+id/changeSettingButton"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:text="@string/change_setting"
+                android:textSize="14sp" />
+
         </LinearLayout>
 
 

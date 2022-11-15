@@ -41,12 +41,18 @@
             app:destination="@id/startFragment"
             app:popUpTo="@id/startFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_navigation_settings_changeSettingFragment"
+            app:destination="@id/changeSettingFragment"/>
+
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.fredrikbogg.android_chat_app.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+
+    </fragment>
     <fragment
         android:id="@+id/chatFragment"
         android:name="com.fredrikbogg.android_chat_app.ui.chat.ChatFragment"
@@ -103,5 +109,10 @@
         android:name="com.fredrikbogg.android_chat_app.ui.forum.navigation_forum"
         android:label="Forum"
         tools:layout="@layout/fragment_forum" />
+    <fragment
+        android:id="@+id/changeSettingFragment"
+        android:name="com.fredrikbogg.android_chat_app.ui.changesetting.ChangeSettingFragment"
+        android:label="Change Setting"
+        tools:layout="@layout/fragment_change_setting" />
 
 </navigation>
