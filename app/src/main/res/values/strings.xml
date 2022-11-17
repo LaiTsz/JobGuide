@@ -41,5 +41,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="none">none</string>
+    <string name="edit">edit</string>
+    <string name="enter">Enter your name and add a profile picture</string>
 
 </resources>

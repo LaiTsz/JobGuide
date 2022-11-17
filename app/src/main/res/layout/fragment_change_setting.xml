@@ -1,14 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.changesetting.ChangeSettingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.fredrikbogg.android_chat_app.ui.changesetting.ChangeSettingViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="?attr/actionBarSize">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/editImageLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+            <com.google.android.material.card.MaterialCardView
+
+                android:id="@+id/editUserImageCardView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="60dp"
+                app:cardPreventCornerOverlap="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="@android:color/white"
+                app:strokeWidth="2dp">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="0dp"
+                    android:contentDescription="@string/user_image"
+                    android:onClick="@{() -> viewmodel.changeUserImagePressed()}"
+                    android:scaleType="centerCrop"
+                    app:bind_image_url="@{viewmodel.userInfo.profileImageUrl}"
+                    tools:src="@tools:sample/avatars[0]" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/edit"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/editUserImageCardView"
+                app:layout_constraintStart_toStartOf="@+id/editUserImageCardView"
+                app:layout_constraintTop_toBottomOf="@id/editUserImageCardView" />
+
+            <TextView
+                android:id="@+id/enter"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/enter"
+                android:padding="10dp"
+                app:layout_constraintTop_toTopOf="@id/editUserImageCardView"
+                app:layout_constraintStart_toEndOf="@id/editUserImageCardView"
+
+                />
+            <EditText
+
+                android:id="@+id/editName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="8"
+                android:hint="@string/display_name"
+                android:importantForAutofill="no"
+                android:inputType="textCapWords"
+                android:maxLength="25"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:textSize="14dp"
+                app:layout_constraintTop_toBottomOf="@id/enter"
+                app:layout_constraintStart_toEndOf="@id/editUserImageCardView"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/editImageLayout">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
