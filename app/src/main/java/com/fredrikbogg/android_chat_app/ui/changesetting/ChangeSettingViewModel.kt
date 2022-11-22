@@ -27,13 +27,16 @@ class ChangeSettingViewModel(private val userID: String) :DefaultViewModel() {
 
     private val _userInfo: MutableLiveData<UserInfo> = MutableLiveData()
     val userInfo: LiveData<UserInfo> = _userInfo
-    val editDisplayName = MutableLiveData<String>() // Two way
+
+        //MutableLiveData<String>() // Two way
     private val _editStatusEvent = MutableLiveData<Event<Unit>>()
     val editStatusEvent: LiveData<Event<Unit>> = _editStatusEvent
 
     private val _editImageEvent = MutableLiveData<Event<Unit>>()
     val editImageEvent: LiveData<Event<Unit>> = _editImageEvent
     private val firebaseReferenceObserver = FirebaseReferenceValueObserver()
+    private val _displayName = MutableLiveData<String>()
+    val displayName: LiveData<String> = _displayName
 
     init {
         loadAndObserveUserInfo()

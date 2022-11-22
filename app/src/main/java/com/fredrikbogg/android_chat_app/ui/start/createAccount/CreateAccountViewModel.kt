@@ -62,7 +62,7 @@ class CreateAccountViewModel : DefaultViewModel() {
             mSnackBarText.value = Event("Password is too short")
             return
         }
-        displayNameText=displayLastNameText.value+displayFirstNameText.value
+        displayNameText=displayLastNameText.value+" "+ displayFirstNameText.value
         createAccount()
     }
 }
