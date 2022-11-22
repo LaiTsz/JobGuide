@@ -27,7 +27,7 @@ class ChangeSettingViewModel(private val userID: String) :DefaultViewModel() {
 
     private val _userInfo: MutableLiveData<UserInfo> = MutableLiveData()
     val userInfo: LiveData<UserInfo> = _userInfo
-
+    val editDisplayName = MutableLiveData<String>() // Two way
     private val _editStatusEvent = MutableLiveData<Event<Unit>>()
     val editStatusEvent: LiveData<Event<Unit>> = _editStatusEvent
 
@@ -68,6 +68,7 @@ class ChangeSettingViewModel(private val userID: String) :DefaultViewModel() {
     fun changeUserStatusPressed() {
         _editStatusEvent.value = Event(Unit)
     }
+
 
 
 

@@ -20,7 +20,7 @@
             android:id="@+id/editImageLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,6 +31,7 @@
                 android:id="@+id/editUserImageCardView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 app:cardCornerRadius="60dp"
                 app:cardPreventCornerOverlap="true"
@@ -82,17 +83,64 @@
                 android:maxLength="25"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
+                android:text="@={viewmodel.editDisplayName}"
                 android:textSize="14dp"
                 app:layout_constraintTop_toBottomOf="@id/enter"
                 app:layout_constraintStart_toEndOf="@id/editUserImageCardView"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/editMajorLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/editImageLayout"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/editmajor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/major"
+                android:layout_marginLeft="10dp"
+                android:textSize="20dp"/>
+            <Spinner
+                android:id="@+id/majorSpinner"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:spinnerMode="dialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/editmajor"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/editImageLayout">
+            app:layout_constraintTop_toBottomOf="@id/editMajorLayout"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/editcareer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/career_direction"
+                android:layout_marginLeft="10dp"
+                android:textSize="20dp"/>
+            <Spinner
+                android:id="@+id/careerSpinner"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:spinnerMode="dialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/editcareer"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
