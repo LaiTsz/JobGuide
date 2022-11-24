@@ -1,31 +1,17 @@
 package com.fredrikbogg.android_chat_app.ui.home
 
-import android.app.Activity
-import android.content.Intent
-import android.os.Build.VERSION_CODES.M
+
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.Button
-import androidx.core.app.ActivityCompat.startActivityForResult
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fredrikbogg.android_chat_app.R
-import com.fredrikbogg.android_chat_app.data.EventObserver
 import com.fredrikbogg.android_chat_app.data.Job
-import com.fredrikbogg.android_chat_app.data.db.repository.DatabaseRepository
 import com.fredrikbogg.android_chat_app.databinding.FragmentHomeBinding
-import com.fredrikbogg.android_chat_app.databinding.FragmentSettingsBinding
-import com.fredrikbogg.android_chat_app.ui.settings.SettingsViewModel
-import com.fredrikbogg.android_chat_app.util.SharedPreferencesUtil
-import com.fredrikbogg.android_chat_app.util.convertFileToByteArray
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlin.math.log
 
 
 class homeFragment : Fragment() {
@@ -67,12 +53,14 @@ class homeFragment : Fragment() {
         val jobLayoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
         jobRecyclerView = requireView().findViewById(R.id.rvJob)
         jobRecyclerView.layoutManager = jobLayoutManager
-        jobArrayList = arrayListOf<Job>()
+        jobRecyclerView.itemAnimator?.changeDuration = 0
+        jobArrayList = arrayListOf()
         jobRecyclerView.hasFixedSize()
         val talkLayoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
         talkRecyclerView = requireView().findViewById(R.id.rvTalk)
         talkRecyclerView.layoutManager = talkLayoutManager
-        talkArrayList = arrayListOf<Job>()
+        talkRecyclerView.itemAnimator?.changeDuration = 0
+        talkArrayList = arrayListOf()
         talkRecyclerView.hasFixedSize()
         getData(jobRecyclerView,jobArrayList,"Job")
         getData(talkRecyclerView,talkArrayList,"Talk")
@@ -87,7 +75,9 @@ class homeFragment : Fragment() {
                         val job = jobSnapshot.getValue(Job::class.java)
                         arrayList.add(job!!)
                     }
-                    recyclerView.adapter = JobAdaptor(arrayList)
+                    val adapter = JobAdaptor(arrayList)
+                    recyclerView.adapter = adapter
+
                 }
             }
             override fun onCancelled(error: DatabaseError) {

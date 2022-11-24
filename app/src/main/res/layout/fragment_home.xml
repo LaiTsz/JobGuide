@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -9,10 +10,15 @@
             type="com.fredrikbogg.android_chat_app.ui.home.JobViewModel" />
 
     </data>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
 
         <TextView
@@ -32,7 +38,8 @@
             android:layout_height="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/talk" />
+            app:layout_constraintTop_toBottomOf="@id/talk"
+            tools:listitem="layout/list_item_talk_job"/>
 
         <TextView
             android:id="@+id/job"
@@ -49,10 +56,16 @@
             android:id="@+id/rvJob"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/job"/>
+            app:layout_constraintTop_toBottomOf="@id/job"
+            tools:listitem="layout/list_item_talk_job"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toBottomOf="@id/rvJob"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
 </layout>
