@@ -45,6 +45,7 @@
     <string name="none">none</string>
     <string name="edit">edit</string>
     <string name="enter">Add a profile picture</string>
-    <string name="major">Major</string>
-    <string name="career_direction">Career Direction</string>
+    <string name="major">Please choose your Major:</string>
+    <string name="career_direction">Please select your Career Direction(s): </string>
+    <string name="description">Tell more about yourself</string>
 </resources>

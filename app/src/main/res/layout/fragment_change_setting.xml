@@ -94,48 +94,80 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/editImageLayout"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="20dp">
 
             <TextView
-                android:id="@+id/editmajor"
+                android:id="@+id/editMajor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/major"
                 android:layout_marginLeft="10dp"
                 android:textSize="20dp"/>
-            <Spinner
-                android:id="@+id/majorSpinner"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:spinnerMode="dialog"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/buttonMajor"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/editmajor"/>
+                android:layout_marginTop="10dp"
+                android:text="Major"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editMajor" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/editCareerLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/editMajorLayout"
             android:layout_marginTop="10dp">
 
             <TextView
-                android:id="@+id/editcareer"
+                android:id="@+id/editCareer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/career_direction"
                 android:layout_marginLeft="10dp"
                 android:textSize="20dp"/>
-            <Spinner
-
-                android:id="@+id/careerSpinner"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:spinnerMode="dialog"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/buttonCareer"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/editcareer"/>
+                android:text="Career Direction(s)"
+                android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editCareer" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/editDescriptionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/editCareerLayout"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/editDescription"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/description"
+                android:layout_marginLeft="10dp"
+                android:textSize="20dp"/>
+            <Button
+                android:id="@+id/buttonDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:onClick="@{() -> viewmodel.changeUserStatusPressed()}"
+                android:text="More"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editDescription" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
