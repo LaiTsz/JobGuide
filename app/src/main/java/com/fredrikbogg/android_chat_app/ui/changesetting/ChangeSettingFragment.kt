@@ -14,14 +14,17 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.fredrikbogg.android_chat_app.App
 import com.fredrikbogg.android_chat_app.data.EventObserver
+import com.fredrikbogg.android_chat_app.data.Job
 import com.fredrikbogg.android_chat_app.databinding.FragmentChangeSettingBinding
+import com.fredrikbogg.android_chat_app.ui.home.JobAdaptor
 import com.fredrikbogg.android_chat_app.util.convertFileToByteArray
 import com.fredrikbogg.searchablemultiselectspinner.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_change_setting.*
-
+import com.google.firebase.database.*
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
@@ -35,8 +38,10 @@ class ChangeSettingFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private val viewModel:ChangeSettingViewModel by viewModels {ChangeSettingViewModelFactory(App.myUserID)  }
     private lateinit var viewDataBinding: FragmentChangeSettingBinding
+    private lateinit var dbRef: DatabaseReference
     private val selectImageIntentRequestCode = 1
-    private var items: MutableList<SearchableItem> = ArrayList()
+    private var majorItems: MutableList<SearchableItem> = ArrayList()
+    private var careerItems: MutableList<SearchableItem> = ArrayList()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,24 +50,28 @@ class ChangeSettingFragment : Fragment() {
             .apply { viewmodel = viewModel }
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
         setHasOptionsMenu(true)
-
         return viewDataBinding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        for (i in 0..20) {
-            items.add(SearchableItem("Item $i", "$i"))
-        }
+        //for (i in 0..20) {
+            //items.add(SearchableItem("Item $i", "$i"))
+      //  }
+        getData(majorItems,"Major")
+        getData(careerItems,"Career")
+
         buttonCareer.setOnClickListener {
-            SearchableMultiSelectSpinner.show(view.context, "Select Career Direction(s)","Done", items, object :
+            SearchableMultiSelectSpinner.show(view.context, "Select Career Direction(s)","Done", careerItems, object :
                 SelectionCompleteListener {
                 override fun onCompleteSelection(selectedItems: ArrayList<SearchableItem>) {
                     Log.e("testingData", selectedItems.toString())
+                    for (i in selectedItems)
+                    {Log.e("items",i.text)}
                 }
 
             })
         }
         buttonMajor.setOnClickListener {
-            SearchableSingleSelectSpinner.show(view.context, "Select Major", items, object :
+            SearchableSingleSelectSpinner.show(view.context, "Select Major",majorItems, object :
                 SingleSelectionCompleteListener {
                 override fun onCompleteSelection(selectedItem: SearchableItem) {
                     Log.e("testingData", selectedItem.toString())
@@ -132,6 +141,28 @@ class ChangeSettingFragment : Fragment() {
         selectImageIntent.type = "image/*"
         startActivityForResult(selectImageIntent, selectImageIntentRequestCode)
     }
+
+    private fun getData(items:MutableList<SearchableItem>,path:String){
+        dbRef = FirebaseDatabase.getInstance().getReference(path)
+        dbRef.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    for(i in snapshot.children){
+                        var text= i.child("text").value.toString()
+                        var code =i.child("code").value.toString()
+                        items.add(SearchableItem(text , code ))
+                    }
+
+
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
+    }
+
 
 
 }
