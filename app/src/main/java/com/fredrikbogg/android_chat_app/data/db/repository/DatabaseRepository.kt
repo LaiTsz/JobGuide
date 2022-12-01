@@ -17,6 +17,10 @@ class DatabaseRepository {
         firebaseDatabaseService.updateUserStatus(userID, status)
     }
 
+    fun updateUserMajor(userID: String, major:String){
+        firebaseDatabaseService.updateUserMajor(userID,major)
+    }
+
     fun updateNewMessage(messagesID: String, message: Message) {
         firebaseDatabaseService.pushNewMessage(messagesID, message)
     }

@@ -93,6 +93,17 @@
                 tools:text="Name" />
 
             <TextView
+                android:id="@+id/majorText"
+                style="@style/MessageSeen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@{viewmodel.userInfo.major}"
+                android:textSize="16sp"
+                tools:text="This is your major" />
+
+            <TextView
                 android:id="@+id/statusText"
                 style="@style/MessageSeen"
                 android:layout_width="match_parent"

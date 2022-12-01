@@ -74,7 +74,8 @@ class ChangeSettingFragment : Fragment() {
             SearchableSingleSelectSpinner.show(view.context, "Select Major",majorItems, object :
                 SingleSelectionCompleteListener {
                 override fun onCompleteSelection(selectedItem: SearchableItem) {
-                    Log.e("testingData", selectedItem.toString())
+                    viewModel.changeUserMajor(selectedItem.text.toString())
+
                 }
 
             })
@@ -152,8 +153,6 @@ class ChangeSettingFragment : Fragment() {
                         var code =i.child("code").value.toString()
                         items.add(SearchableItem(text , code ))
                     }
-
-
                 }
             }
             override fun onCancelled(error: DatabaseError) {

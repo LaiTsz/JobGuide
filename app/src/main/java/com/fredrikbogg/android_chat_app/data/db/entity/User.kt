@@ -17,9 +17,10 @@ data class UserFriend(
 data class UserInfo(
     @get:PropertyName("id") @set:PropertyName("id") var id: String = "",
     @get:PropertyName("displayName") @set:PropertyName("displayName") var displayName: String = "",
-    @get:PropertyName("status") @set:PropertyName("status") var status: String = "No status",
+    @get:PropertyName("status") @set:PropertyName("status") var status: String = "No description yet",
     @get:PropertyName("profileImageUrl") @set:PropertyName("profileImageUrl") var profileImageUrl: String = "",
-    @get:PropertyName("online") @set:PropertyName("online") var online: Boolean = false
+    @get:PropertyName("online") @set:PropertyName("online") var online: Boolean = false,
+    @get:PropertyName("major") @set:PropertyName("major") var major:String= ""
 )
 
 data class UserNotification(

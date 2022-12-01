@@ -55,6 +55,11 @@ class ChangeSettingViewModel(private val userID: String) :DefaultViewModel() {
     fun changeUserStatus(status: String) {
         dbRepository.updateUserStatus(userID, status)
     }
+
+    fun changeUserMajor(major:String){
+        dbRepository.updateUserMajor(userID,major)
+    }
+
     fun changeUserImage(byteArray: ByteArray) {
         storageRepository.updateUserProfileImage(userID, byteArray) { result: Result<Uri> ->
             onResult(null, result)
