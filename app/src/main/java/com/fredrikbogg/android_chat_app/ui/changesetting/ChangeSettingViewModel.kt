@@ -60,6 +60,12 @@ class ChangeSettingViewModel(private val userID: String) :DefaultViewModel() {
         dbRepository.updateUserMajor(userID,major)
     }
 
+    fun changeUserCareer(careerList:ArrayList<String>){
+        val separator = " "
+        val career = careerList.joinToString(separator)
+        dbRepository.updateUserCareer(userID, career)
+    }
+
     fun changeUserImage(byteArray: ByteArray) {
         storageRepository.updateUserProfileImage(userID, byteArray) { result: Result<Uri> ->
             onResult(null, result)

@@ -30,12 +30,6 @@ class SettingsViewModel(private val userID: String) : DefaultViewModel() {
     private val _userInfo: MutableLiveData<UserInfo> = MutableLiveData()
     val userInfo: LiveData<UserInfo> = _userInfo
 
-    private val _editStatusEvent = MutableLiveData<Event<Unit>>()
-    val editStatusEvent: LiveData<Event<Unit>> = _editStatusEvent
-
-    private val _editImageEvent = MutableLiveData<Event<Unit>>()
-    val editImageEvent: LiveData<Event<Unit>> = _editImageEvent
-
     private val _logoutEvent = MutableLiveData<Event<Unit>>()
     val logoutEvent: LiveData<Event<Unit>> = _logoutEvent
 
@@ -55,9 +49,6 @@ class SettingsViewModel(private val userID: String) : DefaultViewModel() {
         { result: Result<UserInfo> -> onResult(_userInfo, result) }
     }
 
-    fun changeUserStatus(status: String) {
-        dbRepository.updateUserStatus(userID, status)
-    }
 
     fun changeUserImage(byteArray: ByteArray) {
         storageRepository.updateUserProfileImage(userID, byteArray) { result: Result<Uri> ->
@@ -68,13 +59,7 @@ class SettingsViewModel(private val userID: String) : DefaultViewModel() {
         }
     }
 
-    fun changeUserImagePressed() {
-        _editImageEvent.value = Event(Unit)
-    }
 
-    fun changeUserStatusPressed() {
-        _editStatusEvent.value = Event(Unit)
-    }
 
     fun logoutUserPressed() {
         authRepository.logoutUser()

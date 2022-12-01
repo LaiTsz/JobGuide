@@ -42,6 +42,7 @@ class ChangeSettingFragment : Fragment() {
     private val selectImageIntentRequestCode = 1
     private var majorItems: MutableList<SearchableItem> = ArrayList()
     private var careerItems: MutableList<SearchableItem> = ArrayList()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -62,10 +63,15 @@ class ChangeSettingFragment : Fragment() {
         buttonCareer.setOnClickListener {
             SearchableMultiSelectSpinner.show(view.context, "Select Career Direction(s)","Done", careerItems, object :
                 SelectionCompleteListener {
+
                 override fun onCompleteSelection(selectedItems: ArrayList<SearchableItem>) {
-                    Log.e("testingData", selectedItems.toString())
+                    val careerList = ArrayList<String>()
                     for (i in selectedItems)
-                    {Log.e("items",i.text)}
+                    {
+                        careerList.add(i.text.toString())
+                    }
+                    viewModel.changeUserCareer(careerList)
+
                 }
 
             })
@@ -124,7 +130,7 @@ class ChangeSettingFragment : Fragment() {
     private fun showEditStatusDialog() {
         val input = EditText(requireActivity() as Context)
         AlertDialog.Builder(requireActivity()).apply {
-            setTitle("Bio")
+            setTitle("Bio (<= 40 characters)")
             setView(input)
             setPositiveButton("Ok") { _, _ ->
                 val textInput = input.text.toString()

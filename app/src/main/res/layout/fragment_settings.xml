@@ -23,7 +23,7 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="52dp"
             android:backgroundTint="@color/textError"
             android:onClick="@{() -> viewmodel.logoutUserPressed()}"
             android:text="@string/logout"
@@ -99,8 +99,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:gravity="center"
-                android:text="@{viewmodel.userInfo.major}"
-                android:textSize="16sp"
+                android:text="@{`Major: `+viewmodel.userInfo.major}"
+                android:textSize="20sp"
+                tools:text="This is your major" />
+
+            <TextView
+                android:id="@+id/careerText"
+                style="@style/MessageSeen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@{`Career direction(s): `+viewmodel.userInfo.career}"
+                android:textSize="20sp"
                 tools:text="This is your major" />
 
             <TextView
@@ -110,38 +121,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:gravity="center"
-                android:text="@{viewmodel.userInfo.status}"
-                android:textSize="16sp"
+                android:text="@{`# `+viewmodel.userInfo.status}"
+                android:textSize="20sp"
                 tools:text="This is a status message" />
 
             <Button
-                android:id="@+id/changeImageButton"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="24dp"
-                android:onClick="@{() -> viewmodel.changeUserImagePressed()}"
-                android:text="@string/change_image"
-                android:textSize="14sp" />
-
-            <Button
-                android:id="@+id/changeStatusButton"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="24dp"
-                android:onClick="@{() -> viewmodel.changeUserStatusPressed()}"
-                android:text="@string/change_status"
-                android:textSize="14sp" />
-            <Button
                 android:id="@+id/changeSettingButton"
-                android:layout_width="match_parent"
+                android:layout_width="260dp"
                 android:layout_height="55dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="24dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="52dp"
                 android:text="@string/change_setting"
                 android:textSize="14sp" />
 

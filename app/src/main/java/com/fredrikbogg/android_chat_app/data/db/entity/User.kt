@@ -20,7 +20,9 @@ data class UserInfo(
     @get:PropertyName("status") @set:PropertyName("status") var status: String = "No description yet",
     @get:PropertyName("profileImageUrl") @set:PropertyName("profileImageUrl") var profileImageUrl: String = "",
     @get:PropertyName("online") @set:PropertyName("online") var online: Boolean = false,
-    @get:PropertyName("major") @set:PropertyName("major") var major:String= ""
+    @get:PropertyName("major") @set:PropertyName("major") var major:String= "undeclared",
+    @get:PropertyName("career") @set:PropertyName("career") var career: String="undecided"
+
 )
 
 data class UserNotification(

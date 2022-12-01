@@ -161,6 +161,11 @@ class FirebaseDataSource {
         refToPath("users/$userID/info/major").setValue(major)
     }
 
+    fun updateUserCareer(userID: String, career:String)
+    {
+        refToPath("users/$userID/info/career").setValue(career)
+    }
+
     fun updateLastMessage(chatID: String, message: Message) {
         refToPath("chats/$chatID/lastMessage").setValue(message)
     }

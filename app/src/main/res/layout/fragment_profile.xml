@@ -87,13 +87,27 @@
             android:maxLength="40"
             style="@style/MessageSeen"
             android:singleLine="true"
-            android:text="@{viewmodel.otherUser.info.major}"
+            android:text="@{`Major: `+viewmodel.otherUser.info.major}"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/nameText"
             tools:text="Major" />
+
+        <TextView
+            android:id="@+id/careerText"
+            style="@style/MessageSeen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:text="@{`Career direction(s): `+viewmodel.otherUser.info.career}"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/majorText"
+            tools:text="career" />
 
         <TextView
             android:id="@+id/statusText"
@@ -103,12 +117,11 @@
             android:maxLength="40"
             style="@style/MessageSeen"
             android:singleLine="true"
-            android:text="@{viewmodel.otherUser.info.status}"
+            android:text="@{`# `+viewmodel.otherUser.info.status}"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/majorText"
+            app:layout_constraintTop_toBottomOf="@id/careerText"
             tools:text="Description" />
 
         <androidx.constraintlayout.widget.ConstraintLayout

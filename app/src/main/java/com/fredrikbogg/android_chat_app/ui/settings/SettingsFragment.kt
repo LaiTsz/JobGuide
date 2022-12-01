@@ -68,11 +68,6 @@ class SettingsFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.editStatusEvent.observe(viewLifecycleOwner,
-            EventObserver { showEditStatusDialog() })
-
-        viewModel.editImageEvent.observe(viewLifecycleOwner,
-            EventObserver { startSelectImageIntent() })
 
         viewModel.logoutEvent.observe(viewLifecycleOwner,
             EventObserver {
@@ -81,28 +76,6 @@ class SettingsFragment : Fragment() {
             })
 
 
-    }
-
-    private fun showEditStatusDialog() {
-        val input = EditText(requireActivity() as Context)
-        AlertDialog.Builder(requireActivity()).apply {
-            setTitle("Status:")
-            setView(input)
-            setPositiveButton("Ok") { _, _ ->
-                val textInput = input.text.toString()
-                if (!textInput.isBlank() && textInput.length <= 40) {
-                    viewModel.changeUserStatus(textInput)
-                }
-            }
-            setNegativeButton("Cancel") { _, _ -> }
-            show()
-        }
-    }
-
-    private fun startSelectImageIntent() {
-        val selectImageIntent = Intent(Intent.ACTION_GET_CONTENT)
-        selectImageIntent.type = "image/*"
-        startActivityForResult(selectImageIntent, selectImageIntentRequestCode)
     }
 
     private fun navigateToStart() {
