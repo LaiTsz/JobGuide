@@ -3,6 +3,7 @@ package com.fredrikbogg.android_chat_app.ui.users
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -19,6 +20,7 @@ class UsersFragment : Fragment() {
     private val viewModel: UsersViewModel by viewModels { UsersViewModelFactory(App.myUserID) }
     private lateinit var viewDataBinding: FragmentUsersBinding
     private lateinit var listAdapter: UsersListAdapter
+    private lateinit var searchView: SearchView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,13 +33,35 @@ class UsersFragment : Fragment() {
         return viewDataBinding.root
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.user_toolbar, menu)
-    }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupListAdapter()
         setupObservers()
+        setupSearchView()
+    }
+
+    private fun setupSearchView() {
+        searchView = requireView().findViewById(R.id.searchView)
+        searchView.clearFocus()
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                TODO("Not yet implemented")
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.postText(newText);
+                return true
+            }
+
+        })
+        searchView.setOnCloseListener(object : SearchView.OnCloseListener{
+            override fun onClose(): Boolean {
+                viewModel.endText()
+                return true
+            }
+
+        })
+
     }
 
 
@@ -45,10 +69,6 @@ class UsersFragment : Fragment() {
         when (item.itemId) {
             android.R.id.home -> {
                 findNavController().popBackStack()
-                return true
-            }
-            R.id.filter_users ->{
-                Toast.makeText(activity,"Text!",Toast.LENGTH_SHORT).show()
                 return true
             }
         }

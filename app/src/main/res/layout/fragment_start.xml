@@ -21,7 +21,7 @@
             style="@style/BoldText"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="40dp"
             android:gravity="center_horizontal"
             android:text="@string/welcome_to_quick_chat"
             android:textSize="36sp"
@@ -70,16 +70,15 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="111dp"
+            android:layout_height="125dp"
             android:layout_marginTop="40dp"
-            android:src="@drawable/chat_box"
+            android:contentDescription="@string/chat_icon"
+            android:src="@drawable/hkust_job_logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteY="73dp"
-            android:contentDescription="@string/chat_icon" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView"

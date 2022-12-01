@@ -2,6 +2,7 @@ package com.fredrikbogg.android_chat_app.ui.home
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -10,15 +11,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fredrikbogg.android_chat_app.R
 import com.fredrikbogg.android_chat_app.data.Job
+import com.fredrikbogg.android_chat_app.data.Talk
 import com.fredrikbogg.android_chat_app.databinding.FragmentHomeBinding
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class homeFragment : Fragment() {
     private val viewModel by viewModels<JobViewModel>()
     private lateinit var dbref: DatabaseReference
     private lateinit var talkRecyclerView: RecyclerView
-    private lateinit var talkArrayList: ArrayList<Job>
+    private lateinit var talkArrayList: ArrayList<Talk>
     private lateinit var jobRecyclerView: RecyclerView
     private lateinit var jobArrayList: ArrayList<Job>
     private lateinit var viewDataBinding: FragmentHomeBinding
@@ -62,16 +65,37 @@ class homeFragment : Fragment() {
         talkRecyclerView.itemAnimator?.changeDuration = 0
         talkArrayList = arrayListOf()
         talkRecyclerView.hasFixedSize()
-        getData(jobRecyclerView,jobArrayList,"Job")
-        getData(talkRecyclerView,talkArrayList,"Talk")
+        getJobData(jobRecyclerView,jobArrayList,"Job")
+        getTalkData(talkRecyclerView,talkArrayList,"Talk")
     }
 
-    private fun getData(recyclerView: RecyclerView, arrayList: ArrayList<Job>, path:String){
+    private fun getTalkData(recyclerView: RecyclerView, arrayList: ArrayList<Talk>, path:String){
         dbref = FirebaseDatabase.getInstance().getReference(path)
         dbref.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()){
                     for(jobSnapshot in snapshot.children){
+                        Log.e("snapshot testing",jobSnapshot.toString())
+                        val talk = jobSnapshot.getValue(Talk::class.java)
+                        arrayList.add(talk!!)
+                    }
+                    val adapter = TalkAdaptor(arrayList)
+                    recyclerView.adapter = adapter
+
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        })
+    }
+    private fun getJobData(recyclerView: RecyclerView, arrayList: ArrayList<Job>, path:String){
+        dbref = FirebaseDatabase.getInstance().getReference(path)
+        dbref.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    for(jobSnapshot in snapshot.children){
+                        Log.e("snapshot testing",jobSnapshot.toString())
                         val job = jobSnapshot.getValue(Job::class.java)
                         arrayList.add(job!!)
                     }
