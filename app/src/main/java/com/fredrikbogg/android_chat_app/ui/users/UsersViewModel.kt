@@ -24,15 +24,37 @@ class UsersViewModel(private val myUserID: String) : DefaultViewModel() {
     private val updatedUsersList = MutableLiveData<MutableList<User>>()
     val usersList = MediatorLiveData<List<User>>()
     private val filterText = MutableLiveData<String>()
+    private var filterSelected = 1
 
 
     init {
-        usersList.addSource(filterText){ mutableList ->
-            if(filterText.value != ""){
-                usersList.value = updatedUsersList.value?.filter {
-                it.info.displayName.toLowerCase().contains(filterText.value.toString().toLowerCase())&&
-                        it.info.id != myUserID
-            }}
+        usersList.addSource(filterText){
+            if(filterText.value !=""){
+                    if(filterSelected == 1){
+                        Log.e("Filter Selected","1")
+                    usersList.value = updatedUsersList.value?.filter {
+                        it.info.displayName.toLowerCase()
+                            .contains(filterText.value.toString().toLowerCase()) &&
+                                it.info.id != myUserID
+                    }
+                }
+                else if (filterSelected == 2){
+                        Log.e("Filter Selected","2")
+                        usersList.value = updatedUsersList.value?.filter {
+                            it.info.major.toLowerCase()
+                                .contains(filterText.value.toString().toLowerCase()) &&
+                                    it.info.id != myUserID
+                        }
+                }
+                else{
+                        Log.e("Filter Selected","3")
+                        usersList.value = updatedUsersList.value?.filter {
+                            it.info.career.toLowerCase()
+                                .contains(filterText.value.toString().toLowerCase()) &&
+                                    it.info.id != myUserID
+                        }
+                }
+            }
             else{
                 usersList.value = updatedUsersList.value?.filter {false}
             }
@@ -55,5 +77,17 @@ class UsersViewModel(private val myUserID: String) : DefaultViewModel() {
     }
     fun selectUser(user: User) {
         _selectedUser.value = Event(user)
+    }
+    fun selectUsernameFilter(){
+        filterSelected = 1
+        postText(filterText.value)
+    }
+    fun selectMajorFilter(){
+        filterSelected = 2
+        postText(filterText.value)
+    }
+    fun selectCareerFilter(){
+        filterSelected = 3
+        postText(filterText.value)
     }
 }

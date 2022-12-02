@@ -32,7 +32,46 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:queryHint="Search username ...."
                 app:iconifiedByDefault="false"/>
+            <LinearLayout
+                android:id="@+id/searchFilter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/searchView"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Username"
+                    android:background="@drawable/select_filter_button_background"
+                    android:onClick="@{() ->viewmodel.selectUsernameFilter()}"
+                    android:layout_marginStart="8dp"
+                    />
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Major"
+                    android:background="@drawable/select_filter_button_background"
+                    android:onClick="@{() ->viewmodel.selectMajorFilter()}"
+                    android:layout_marginStart="8dp"/>
 
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Career"
+                    android:background="@drawable/select_filter_button_background"
+                    android:onClick="@{() ->viewmodel.selectCareerFilter()}"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"/>
+
+
+
+            </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/usersRecyclerView"
                 android:layout_width="match_parent"
@@ -43,7 +82,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/searchView"
+                app:layout_constraintTop_toBottomOf="@+id/searchFilter"
                 tools:listitem="@layout/list_item_user" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
