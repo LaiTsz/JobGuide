@@ -30,7 +30,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:queryHint="Search username ...."
+                app:queryHint="Search with the keyword"
                 app:iconifiedByDefault="false"/>
             <LinearLayout
                 android:id="@+id/searchFilter"

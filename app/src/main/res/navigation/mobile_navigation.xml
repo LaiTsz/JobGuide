@@ -106,13 +106,30 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_forum"
-        android:name="com.fredrikbogg.android_chat_app.ui.forum.navigation_forum"
+        android:name="com.fredrikbogg.android_chat_app.ui.forum.ForumFragment"
         android:label="Forum"
-        tools:layout="@layout/fragment_forum" />
+        tools:layout="@layout/fragment_forum" >
+        <action
+            android:id="@+id/action_navigation_forum_to_addPost"
+            app:destination="@id/addPostFragment" />
+        <action
+            android:id="@+id/action_navigation_forum_to_post"
+            app:destination="@id/postFragment" />
+    </fragment>
     <fragment
         android:id="@+id/changeSettingFragment"
         android:name="com.fredrikbogg.android_chat_app.ui.changesetting.ChangeSettingFragment"
         android:label="Change Setting"
         tools:layout="@layout/fragment_change_setting" />
+    <fragment
+        android:id="@+id/addPostFragment"
+        android:name="com.fredrikbogg.android_chat_app.ui.addPost.AddPostFragment"
+        android:label="AddPost"
+        tools:layout="@layout/fragment_add_post" />
+    <fragment
+        android:id="@+id/postFragment"
+        android:name="com.fredrikbogg.android_chat_app.ui.post.PostFragment"
+        android:label="Post"
+        tools:layout="@layout/fragment_post" />
 
 </navigation>

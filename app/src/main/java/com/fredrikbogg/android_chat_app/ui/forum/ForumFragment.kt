@@ -1,60 +1,65 @@
 package com.fredrikbogg.android_chat_app.ui.forum
 
 import android.os.Bundle
+import android.view.*
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.fredrikbogg.android_chat_app.R
+import com.fredrikbogg.android_chat_app.data.EventObserver
+import com.fredrikbogg.android_chat_app.databinding.FragmentForumBinding
+import com.fredrikbogg.android_chat_app.databinding.FragmentUsersBinding
+import com.fredrikbogg.android_chat_app.ui.addPost.AddPostViewModel
+import com.fredrikbogg.android_chat_app.ui.profile.ProfileFragment
+import com.fredrikbogg.android_chat_app.ui.users.UsersListAdapter
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class ForumFragment : Fragment() {
+    private val viewModel by viewModels<ForumViewModel>()
+    private lateinit var viewDataBinding: FragmentForumBinding
+    private lateinit var listAdapter: ForumListAdapter
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
+        viewDataBinding= FragmentForumBinding.inflate(inflater, container, false).apply { viewmodel = viewModel }
+        viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
+        setHasOptionsMenu(true)
+        return viewDataBinding.root
+    }
 
-/**
- * A simple [Fragment] subclass.
- * Use the [navigation_forum.newInstance] factory method to
- * create an instance of this fragment.
- */
-class navigation_forum : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.forum_toolbar, menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.add_post -> {
+                findNavController().navigate(R.id.action_navigation_forum_to_addPost)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        setupListAdapter()
+    }
+    private fun setupListAdapter() {
+        val viewModel = viewDataBinding.viewmodel
+        if (viewModel != null) {
+            listAdapter = ForumListAdapter(viewModel)
+            viewDataBinding.forumRecyclerView.adapter = listAdapter
+        } else {
+            throw Exception("The viewmodel is not initialized")
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_forum, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment navigation_forum.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            navigation_forum().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+//    private fun setupObservers() {
+//        viewModel.selectedPost.observe(viewLifecycleOwner, EventObserver { navigateToPost(it.info.id) })
+//    }
+//
+//    private fun navigateToPost(userID: String) {
+//        val bundle = bundleOf(ProfileFragment.ARGS_KEY_USER_ID to userID)
+//        findNavController().navigate(R.id.action_navigation_users_to_profileFragment, bundle)
+//    }
 }

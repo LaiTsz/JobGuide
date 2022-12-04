@@ -1,5 +1,6 @@
 package com.fredrikbogg.android_chat_app.data.db.remote
 
+import android.util.Log
 import com.fredrikbogg.android_chat_app.data.Result
 import com.fredrikbogg.android_chat_app.data.db.entity.*
 import com.fredrikbogg.android_chat_app.util.wrapSnapshotToArrayList
@@ -194,6 +195,15 @@ class FirebaseDataSource {
     fun pushNewMessage(messagesID: String, message: Message) {
         refToPath("messages/$messagesID").push().setValue(message)
     }
+
+    fun pushNewPost(post: Post):String? {
+        var key = refToPath("Posts").push().key
+        refToPath("/Posts/$key/lastMessage").setValue(post.lastMessage)
+        refToPath("/Posts/$key/topic").setValue(post.topic)
+        refToPath("/Posts/$key/id").setValue(key)
+        return key
+    }
+
     //endregion
 
     //region Remove
@@ -238,7 +248,11 @@ class FirebaseDataSource {
 
     fun loadUsersTask(): Task<DataSnapshot> {
         val src = TaskCompletionSource<DataSnapshot>()
+        Log.e("loadUserTask",src.task.toString())
+
         val listener = attachValueListenerToTaskCompletion(src)
+        Log.e("loadUserTask","testing")
+
         refToPath("users").addListenerForSingleValueEvent(listener)
         return src.task
     }
@@ -264,6 +278,12 @@ class FirebaseDataSource {
         return src.task
     }
 
+    fun loadForumTask(): Task<DataSnapshot> {
+        val src = TaskCompletionSource<DataSnapshot>()
+        val listener = attachValueListenerToTaskCompletion(src)
+        refToPath("Posts").addListenerForSingleValueEvent(listener)
+        return src.task
+    }
     //endregion
 
     //region Value Observers

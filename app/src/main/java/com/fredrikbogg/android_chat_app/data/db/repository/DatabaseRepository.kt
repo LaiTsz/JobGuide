@@ -1,5 +1,6 @@
 package com.fredrikbogg.android_chat_app.data.db.repository
 
+import android.util.Log
 import com.fredrikbogg.android_chat_app.data.db.entity.*
 import com.fredrikbogg.android_chat_app.data.db.remote.FirebaseDataSource
 import com.fredrikbogg.android_chat_app.data.db.remote.FirebaseReferenceChildObserver
@@ -57,6 +58,9 @@ class DatabaseRepository {
         firebaseDatabaseService.updateUserProfileImageUrl(userID, url)
     }
 
+    fun updateNewPost(post: Post): String? {
+        return firebaseDatabaseService.pushNewPost(post)
+    }
     //endregion
 
     //region Remove
@@ -110,6 +114,7 @@ class DatabaseRepository {
         b.invoke(Result.Loading)
         firebaseDatabaseService.loadUsersTask().addOnSuccessListener {
             val usersList = wrapSnapshotToArrayList(User::class.java, it)
+            Log.e("loadUsers",usersList.toString())
             b.invoke(Result.Success(usersList))
         }.addOnFailureListener { b.invoke(Result.Error(it.message)) }
     }
@@ -130,6 +135,14 @@ class DatabaseRepository {
         }.addOnFailureListener { b.invoke(Result.Error(it.message)) }
     }
 
+    fun loadForum(b: ((Result<MutableList<Post>>) -> Unit)) {
+        b.invoke(Result.Loading)
+        firebaseDatabaseService.loadForumTask().addOnSuccessListener {
+            val forumList = wrapSnapshotToArrayList(Post::class.java, it)
+            Log.e("loadForum",forumList.toString())
+            b.invoke(Result.Success(forumList))
+        }.addOnFailureListener { b.invoke(Result.Error(it.message)) }
+    }
     //endregion
 
     //#region Load and Observe
@@ -154,6 +167,9 @@ class DatabaseRepository {
         firebaseDatabaseService.attachChatObserver(Chat::class.java, chatID, observer, b)
     }
 
+    fun loadAndObserveForum(userID: String, observer: FirebaseReferenceValueObserver, b: ((Result<User>) -> Unit)) {
+        firebaseDatabaseService.attachUserObserver(User::class.java, userID, observer, b)
+    }
     //endregion
 }
 

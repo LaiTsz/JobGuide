@@ -85,9 +85,11 @@ class UsersViewModel(private val myUserID: String) : DefaultViewModel() {
     fun selectMajorFilter(){
         filterSelected = 2
         postText(filterText.value)
+
     }
     fun selectCareerFilter(){
         filterSelected = 3
         postText(filterText.value)
+
     }
 }
