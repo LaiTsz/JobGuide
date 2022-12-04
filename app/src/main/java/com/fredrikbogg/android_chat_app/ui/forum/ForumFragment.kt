@@ -1,6 +1,7 @@
 package com.fredrikbogg.android_chat_app.ui.forum
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -43,6 +44,7 @@ class ForumFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupListAdapter()
+        setupObservers()
     }
     private fun setupListAdapter() {
         val viewModel = viewDataBinding.viewmodel
@@ -54,12 +56,17 @@ class ForumFragment : Fragment() {
         }
     }
 
-//    private fun setupObservers() {
-//        viewModel.selectedPost.observe(viewLifecycleOwner, EventObserver { navigateToPost(it.info.id) })
-//    }
-//
-//    private fun navigateToPost(userID: String) {
-//        val bundle = bundleOf(ProfileFragment.ARGS_KEY_USER_ID to userID)
-//        findNavController().navigate(R.id.action_navigation_users_to_profileFragment, bundle)
-//    }
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadForum()
+    }
+    private fun setupObservers() {
+        viewModel.selectedPost.observe(viewLifecycleOwner, EventObserver { navigateToPost(it.id) })
+        Log.e("clicked", viewModel.selectedPost.value.toString())
+    }
+
+    private fun navigateToPost(postID: String) {
+        val bundle = bundleOf(ProfileFragment.ARGS_KEY_USER_ID to postID)
+        findNavController().navigate(R.id.action_navigation_forum_to_post, bundle)
+    }
 }

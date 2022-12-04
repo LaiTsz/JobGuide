@@ -3,21 +3,30 @@ package com.fredrikbogg.android_chat_app.ui.addPost
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.fredrikbogg.android_chat_app.App.Companion.myUserID
+import com.fredrikbogg.android_chat_app.data.Result
 import com.fredrikbogg.android_chat_app.data.db.entity.Post
+import com.fredrikbogg.android_chat_app.data.db.entity.User
+import com.fredrikbogg.android_chat_app.data.db.entity.UserInfo
+import com.fredrikbogg.android_chat_app.data.db.remote.FirebaseReferenceChildObserver
+import com.fredrikbogg.android_chat_app.data.db.remote.FirebaseReferenceValueObserver
 import com.fredrikbogg.android_chat_app.data.db.repository.DatabaseRepository
+import com.fredrikbogg.android_chat_app.ui.DefaultViewModel
 
-class AddPostViewModel: ViewModel() {
+class AddPostViewModel: DefaultViewModel() {
     private val dbRepository :DatabaseRepository= DatabaseRepository()
     val topicText = MutableLiveData<String>()
     val firstMessageText = MutableLiveData<String>()
-    private val key = MutableLiveData<String>()
+    private val postID = MutableLiveData<String>()
+    private val newPost = MutableLiveData<Post>()
 
     fun submitButtonPressed(){
         Log.e("AddPost","${topicText.value}+${firstMessageText.value}")
-        val newPost = Post().apply {
+        newPost.value= Post().apply {
             lastMessage = firstMessageText.value.toString()
             topic = topicText.value.toString()
         }
-        key.value = dbRepository.updateNewPost(newPost)
+        postID.value = dbRepository.updateNewPost(newPost.value!!)
+
     }
 }

@@ -6,7 +6,9 @@ import com.fredrikbogg.android_chat_app.data.db.repository.DatabaseRepository
 import com.fredrikbogg.android_chat_app.data.Event
 import com.fredrikbogg.android_chat_app.data.Result
 import com.fredrikbogg.android_chat_app.data.db.entity.Post
+import com.fredrikbogg.android_chat_app.data.db.remote.FirebaseReferenceChildObserver
 import com.fredrikbogg.android_chat_app.ui.DefaultViewModel
+import com.google.firebase.database.*
 import kotlin.math.E
 
 
@@ -23,12 +25,14 @@ class ForumViewModel: DefaultViewModel() {
         }
         loadForum()
         Log.e("forumList","${forumList.value}")
+
     }
 
-    private fun loadForum() {
+    fun loadForum() {
         repository.loadForum { result: Result<MutableList<Post>> ->
             onResult(updatedForumList, result)
         }
+
     }
 
     fun selectForum(post: Post){

@@ -106,6 +106,7 @@ class DatabaseRepository {
         }.addOnFailureListener { b.invoke(Result.Error(it.message)) }
     }
 
+
     //endregion
 
     //region Load List
@@ -167,9 +168,7 @@ class DatabaseRepository {
         firebaseDatabaseService.attachChatObserver(Chat::class.java, chatID, observer, b)
     }
 
-    fun loadAndObserveForum(userID: String, observer: FirebaseReferenceValueObserver, b: ((Result<User>) -> Unit)) {
-        firebaseDatabaseService.attachUserObserver(User::class.java, userID, observer, b)
-    }
+
     //endregion
 }
 
