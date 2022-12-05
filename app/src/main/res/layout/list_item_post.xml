@@ -5,6 +5,17 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.fredrikbogg.android_chat_app.ui.post.PostViewModel" />
+
+        <variable
+            name="comment"
+            type="com.fredrikbogg.android_chat_app.data.db.entity.Comment" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,6 +45,7 @@
                 android:textSize="12sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:text="@{comment.displayName}"
                 tools:text="Username" />
 
             <TextView
@@ -44,6 +56,7 @@
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
+                android:text="@{comment.context}"
                 app:layout_constraintTop_toBottomOf="@id/commentUsername"
                 tools:text="Message" />
 

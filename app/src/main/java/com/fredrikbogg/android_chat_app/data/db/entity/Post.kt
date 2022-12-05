@@ -4,7 +4,7 @@ import com.google.firebase.database.PropertyName
 
 
 data class Post(
-    @get:PropertyName("lastMessage") @set:PropertyName("lastMessage") var lastMessage: String = "",
+    @get:PropertyName("lastComment") @set:PropertyName("lastComment") var lastComment: String = "",
     @get:PropertyName("topic") @set:PropertyName("topic") var topic: String = "",
     @get:PropertyName("id") @set:PropertyName("id") var id: String = ""
 

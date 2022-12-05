@@ -16,14 +16,12 @@ import com.fredrikbogg.android_chat_app.ui.DefaultViewModel
 class AddPostViewModel: DefaultViewModel() {
     private val dbRepository :DatabaseRepository= DatabaseRepository()
     val topicText = MutableLiveData<String>()
-    val firstMessageText = MutableLiveData<String>()
     private val postID = MutableLiveData<String>()
     private val newPost = MutableLiveData<Post>()
 
     fun submitButtonPressed(){
-        Log.e("AddPost","${topicText.value}+${firstMessageText.value}")
         newPost.value= Post().apply {
-            lastMessage = firstMessageText.value.toString()
+            lastComment = ""
             topic = topicText.value.toString()
         }
         postID.value = dbRepository.updateNewPost(newPost.value!!)

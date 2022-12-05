@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.startFragment -> navView.visibility = View.GONE
                 R.id.loginFragment -> navView.visibility = View.GONE
                 R.id.createAccountFragment -> navView.visibility = View.GONE
+                R.id.postFragment -> navView.visibility = View.GONE
                 else -> navView.visibility = View.VISIBLE
             }
             showGlobalProgressBar(false)

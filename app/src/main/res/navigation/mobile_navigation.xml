@@ -129,7 +129,7 @@
     <fragment
         android:id="@+id/postFragment"
         android:name="com.fredrikbogg.android_chat_app.ui.post.PostFragment"
-        android:label="Post"
+        android:label="@string/title_Post"
         tools:layout="@layout/fragment_post" />
 
 </navigation>

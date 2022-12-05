@@ -196,14 +196,21 @@ class FirebaseDataSource {
         refToPath("messages/$messagesID").push().setValue(message)
     }
 
+    fun pushNewComment(commentID: String, comment: Comment) {
+        refToPath("Comments/$commentID").push().setValue(comment)
+    }
+
     fun pushNewPost(post: Post):String? {
         var key = refToPath("Posts").push().key
-        refToPath("/Posts/$key/lastMessage").setValue(post.lastMessage)
+        refToPath("/Posts/$key/lastComment").setValue(post.lastComment)
         refToPath("/Posts/$key/topic").setValue(post.topic)
         refToPath("/Posts/$key/id").setValue(key)
         return key
     }
 
+    fun updateLastComment(postID: String, context: String) {
+        refToPath("Posts/$postID/lastComment").setValue(context)
+    }
     //endregion
 
     //region Remove
@@ -284,6 +291,13 @@ class FirebaseDataSource {
         refToPath("Posts").addListenerForSingleValueEvent(listener)
         return src.task
     }
+
+    fun loadCommentTask(postID: String): Task<DataSnapshot> {
+        val src = TaskCompletionSource<DataSnapshot>()
+        val listener = attachValueListenerToTaskCompletion(src)
+        refToPath("Comments/$postID").addListenerForSingleValueEvent(listener)
+        return src.task
+    }
     //endregion
 
     //region Value Observers
@@ -315,6 +329,10 @@ class FirebaseDataSource {
         refObs.start(listener, refToPath("chats/$chatID"))
     }
 
+    fun <T> attachCommentObserver(resultClassName: Class<T>, postID: String, refObs: FirebaseReferenceValueObserver, b: ((Result<T>) -> Unit)) {
+        val listener = attachValueListenerToBlock(resultClassName, b)
+        refObs.start(listener, refToPath("Comments/$postID"))
+    }
 
     //endregion
 }

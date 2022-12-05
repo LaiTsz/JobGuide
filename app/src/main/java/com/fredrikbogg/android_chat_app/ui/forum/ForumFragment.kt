@@ -7,11 +7,13 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.fredrikbogg.android_chat_app.App
 import com.fredrikbogg.android_chat_app.R
 import com.fredrikbogg.android_chat_app.data.EventObserver
 import com.fredrikbogg.android_chat_app.databinding.FragmentForumBinding
 import com.fredrikbogg.android_chat_app.databinding.FragmentUsersBinding
 import com.fredrikbogg.android_chat_app.ui.addPost.AddPostViewModel
+import com.fredrikbogg.android_chat_app.ui.post.PostFragment
 import com.fredrikbogg.android_chat_app.ui.profile.ProfileFragment
 import com.fredrikbogg.android_chat_app.ui.users.UsersListAdapter
 
@@ -61,12 +63,14 @@ class ForumFragment : Fragment() {
         viewModel.loadForum()
     }
     private fun setupObservers() {
-        viewModel.selectedPost.observe(viewLifecycleOwner, EventObserver { navigateToPost(it.id) })
-        Log.e("clicked", viewModel.selectedPost.value.toString())
+        viewModel.selectedPost.observe(viewLifecycleOwner, EventObserver { navigateToPost(it.id)
+        Log.e("clicked",it.id)})
     }
 
     private fun navigateToPost(postID: String) {
-        val bundle = bundleOf(ProfileFragment.ARGS_KEY_USER_ID to postID)
+        val bundle = bundleOf(
+            PostFragment.ARGS_KEY_POST_ID to postID,
+            PostFragment.ARGS_KEY_USER_ID to App.myUserID)
         findNavController().navigate(R.id.action_navigation_forum_to_post, bundle)
     }
 }

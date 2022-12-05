@@ -30,6 +30,10 @@ class DatabaseRepository {
         firebaseDatabaseService.pushNewMessage(messagesID, message)
     }
 
+    fun updateNewComment(commentID: String, comment: Comment) {
+        firebaseDatabaseService.pushNewComment(commentID, comment)
+    }
+
     fun updateNewUser(user: User) {
         firebaseDatabaseService.updateNewUser(user)
     }
@@ -61,6 +65,10 @@ class DatabaseRepository {
     fun updateNewPost(post: Post): String? {
         return firebaseDatabaseService.pushNewPost(post)
     }
+    fun updatePostLastComment(postID: String, context: String) {
+        firebaseDatabaseService.updateLastComment(postID, context)
+    }
+
     //endregion
 
     //region Remove
@@ -103,6 +111,11 @@ class DatabaseRepository {
     fun loadChat(chatID: String, b: ((Result<Chat>) -> Unit)) {
         firebaseDatabaseService.loadChatTask(chatID).addOnSuccessListener {
             b.invoke(Result.Success(wrapSnapshotToClass(Chat::class.java, it)))
+        }.addOnFailureListener { b.invoke(Result.Error(it.message)) }
+    }
+    fun loadPost(postID: String, b: ((Result<Comment>) -> Unit)) {
+        firebaseDatabaseService.loadCommentTask(postID).addOnSuccessListener {
+            b.invoke(Result.Success(wrapSnapshotToClass(Comment::class.java, it)))
         }.addOnFailureListener { b.invoke(Result.Error(it.message)) }
     }
 
@@ -168,6 +181,9 @@ class DatabaseRepository {
         firebaseDatabaseService.attachChatObserver(Chat::class.java, chatID, observer, b)
     }
 
+    fun loadAndObserveComment(postID: String, observer: FirebaseReferenceValueObserver, b: ((Result<Comment>) -> Unit)) {
+        firebaseDatabaseService.attachCommentObserver(Comment::class.java, postID, observer, b)
+    }
 
     //endregion
 }
