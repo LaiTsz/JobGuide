@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         mainProgressBar = findViewById(R.id.main_progressBar)
 
         notificationsBadge =
-            navView.getOrCreateBadge(R.id.notificationsFragment).apply { isVisible = false }
+            navView.getOrCreateBadge(R.id.notification_request).apply { isVisible = false }
 
         setSupportActionBar(mainToolbar)
 

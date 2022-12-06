@@ -329,9 +329,14 @@ class FirebaseDataSource {
         refObs.start(listener, refToPath("chats/$chatID"))
     }
 
-    fun <T> attachCommentObserver(resultClassName: Class<T>, postID: String, refObs: FirebaseReferenceValueObserver, b: ((Result<T>) -> Unit)) {
-        val listener = attachValueListenerToBlock(resultClassName, b)
+    fun <T> attachCommentObserver(resultClassName: Class<T>, postID: String, refObs: FirebaseReferenceChildObserver, b: ((Result<T>) -> Unit)) {
+        val listener = attachChildListenerToBlock(resultClassName, b)
         refObs.start(listener, refToPath("Comments/$postID"))
+    }
+
+    fun <T> attachPostInfoObserver(resultClassName: Class<T>, postID: String, refObs: FirebaseReferenceValueObserver, b: ((Result<T>) -> Unit)) {
+        val listener = attachValueListenerToBlock(resultClassName, b)
+        refObs.start(listener, refToPath("Posts/$postID"))
     }
 
     //endregion

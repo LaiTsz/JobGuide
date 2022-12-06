@@ -32,9 +32,7 @@ class ForumViewModel: DefaultViewModel() {
         repository.loadForum { result: Result<MutableList<Post>> ->
             onResult(updatedForumList, result)
         }
-
     }
-
     fun selectForum(post: Post){
         _selectedPost.value = Event(post)
     }

@@ -125,11 +125,19 @@
         android:id="@+id/addPostFragment"
         android:name="com.fredrikbogg.android_chat_app.ui.addPost.AddPostFragment"
         android:label="AddPost"
-        tools:layout="@layout/fragment_add_post" />
+        tools:layout="@layout/fragment_add_post" >
+        <action
+            android:id="@+id/action_addPostFragment_to_postFragment"
+            app:destination="@id/postFragment" />
+    </fragment>
     <fragment
         android:id="@+id/postFragment"
         android:name="com.fredrikbogg.android_chat_app.ui.post.PostFragment"
         android:label="@string/title_Post"
-        tools:layout="@layout/fragment_post" />
+        tools:layout="@layout/fragment_post" >
+        <action
+            android:id="@+id/action_postFragment_to_navigation_forum"
+            app:destination="@id/navigation_forum" />
+    </fragment>
 
 </navigation>

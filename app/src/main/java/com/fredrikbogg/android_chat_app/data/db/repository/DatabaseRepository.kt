@@ -128,7 +128,6 @@ class DatabaseRepository {
         b.invoke(Result.Loading)
         firebaseDatabaseService.loadUsersTask().addOnSuccessListener {
             val usersList = wrapSnapshotToArrayList(User::class.java, it)
-            Log.e("loadUsers",usersList.toString())
             b.invoke(Result.Success(usersList))
         }.addOnFailureListener { b.invoke(Result.Error(it.message)) }
     }
@@ -153,7 +152,6 @@ class DatabaseRepository {
         b.invoke(Result.Loading)
         firebaseDatabaseService.loadForumTask().addOnSuccessListener {
             val forumList = wrapSnapshotToArrayList(Post::class.java, it)
-            Log.e("loadForum",forumList.toString())
             b.invoke(Result.Success(forumList))
         }.addOnFailureListener { b.invoke(Result.Error(it.message)) }
     }
@@ -181,9 +179,15 @@ class DatabaseRepository {
         firebaseDatabaseService.attachChatObserver(Chat::class.java, chatID, observer, b)
     }
 
-    fun loadAndObserveComment(postID: String, observer: FirebaseReferenceValueObserver, b: ((Result<Comment>) -> Unit)) {
+    fun loadAndObserveCommentAdded(postID: String, observer: FirebaseReferenceChildObserver, b: ((Result<Comment>) -> Unit)) {
         firebaseDatabaseService.attachCommentObserver(Comment::class.java, postID, observer, b)
     }
+
+    fun loadAndObservePostInfo(postID: String, observer: FirebaseReferenceValueObserver, b: ((Result<Post>) -> Unit)) {
+        firebaseDatabaseService.attachPostInfoObserver(Post::class.java, postID, observer, b)
+    }
+
+
 
     //endregion
 }

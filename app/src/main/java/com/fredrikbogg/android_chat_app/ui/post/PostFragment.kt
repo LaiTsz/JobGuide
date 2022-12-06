@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.fredrikbogg.android_chat_app.R
 import com.fredrikbogg.android_chat_app.databinding.FragmentPostBinding
 import com.fredrikbogg.android_chat_app.databinding.ToolbarAddonPostBinding
 import kotlinx.android.synthetic.main.fragment_post.*
@@ -33,11 +34,15 @@ class PostFragment : Fragment() {
     private lateinit var listAdapterObserver: RecyclerView.AdapterDataObserver
     private lateinit var toolbarAddonPostBinding: ToolbarAddonPostBinding
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onPause() {
+        super.onPause()
         removeCustomToolbar()
     }
 
+    override fun onResume() {
+        super.onResume()
+        setupCustomToolbar()
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -64,7 +69,7 @@ class PostFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                findNavController().popBackStack()
+                findNavController().navigate(R.id.action_postFragment_to_navigation_forum)
                 return true
             }
         }
@@ -101,9 +106,9 @@ class PostFragment : Fragment() {
             throw Exception("The viewmodel is not initialized")
         }
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         listAdapter.unregisterAdapterDataObserver(listAdapterObserver)
     }
+
 }

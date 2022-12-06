@@ -1,5 +1,6 @@
 package com.fredrikbogg.android_chat_app.ui.post
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.fredrikbogg.android_chat_app.App.Companion.myUserID
 import com.fredrikbogg.android_chat_app.data.db.remote.FirebaseReferenceChildObserver
@@ -21,45 +22,44 @@ class PostViewModelFactory(private val myUserID: String,private val postID: Stri
 class PostViewModel(private val myUserID: String,private val postID: String) : DefaultViewModel() {
 
     private val dbRepository: DatabaseRepository = DatabaseRepository()
-
     private val _addedComment = MutableLiveData<Comment>()
-
-    private val fbRefMessagesChildObserver = FirebaseReferenceChildObserver()
-    private val fbRefPostObserver = FirebaseReferenceValueObserver()
-
+    private val _userInfo: MutableLiveData<UserInfo> = MutableLiveData()
+    val userInfo: LiveData<UserInfo> = _userInfo
+    private val _postInfo: MutableLiveData<Post> = MutableLiveData()
+    val postInfo: LiveData<Post> = _postInfo
+    private val fbRefPostObserver = FirebaseReferenceChildObserver()
+    private val firebaseReferenceObserver = FirebaseReferenceValueObserver()
     val commentList = MediatorLiveData<MutableList<Comment>>()
     val newCommentText = MutableLiveData<String>()
-    val postName = postID
 
     init {
         setupPost()
-        checkAndUpdateLastComment()
+        loadAndObserveUserInfo()
+        loadAndObservePostInfo()
     }
 
     override fun onCleared() {
         super.onCleared()
-        fbRefMessagesChildObserver.clear()
         fbRefPostObserver.clear()
     }
 
-    private fun checkAndUpdateLastComment() {
-        dbRepository.loadPost(postID) { result: Result<Comment> ->
-            if (result is Result.Success && result.data != null) {
-                result.data.context.let {
-                        dbRepository.updatePostLastComment(postID, it)
-                    }
-                }
-            }
+    private fun loadAndObserveUserInfo() {
+        dbRepository.loadAndObserveUserInfo(myUserID, firebaseReferenceObserver)
+        { result: Result<UserInfo> -> onResult(_userInfo, result) }
+    }
+
+    private fun loadAndObservePostInfo() {
+        dbRepository.loadAndObservePostInfo(postID, firebaseReferenceObserver)
+        { result: Result<Post> -> onResult(_postInfo, result) }
     }
 
     private fun setupPost() {
-                loadAndObserveNewComment()
+        loadAndObserveNewComment()
     }
 
     private fun loadAndObserveNewComment() {
         commentList.addSource(_addedComment) { commentList.addNewItem(it) }
-
-        dbRepository.loadAndObserveComment(postID, fbRefPostObserver
+        dbRepository.loadAndObserveCommentAdded(postID, fbRefPostObserver
         ) { result: Result<Comment> ->
             onResult(_addedComment, result)
         }
@@ -67,9 +67,14 @@ class PostViewModel(private val myUserID: String,private val postID: String) : D
 
     fun sendCommentPressed() {
         if (!newCommentText.value.isNullOrBlank()) {
-            val newComment= Comment(myUserID, newCommentText.value!!)
-            dbRepository.updateNewComment(postID, newComment)
-            dbRepository.updatePostLastComment(postID, newComment.context)
+            var displayName = userInfo.value?.displayName
+            val newComment= displayName?.let { Comment(it, newCommentText.value!!) }
+            if (newComment != null) {
+                dbRepository.updateNewComment(postID, newComment)
+            }
+            if (newComment != null) {
+                dbRepository.updatePostLastComment(postID, newComment.context)
+            }
             newCommentText.value = null
         }
     }

@@ -33,10 +33,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:text="@{viewmodel.postName}"
+                android:text="@{viewmodel.postInfo.topic}"
                 android:textColor="@android:color/white"
-                android:textSize="18sp"
-                android:layout_marginStart="16dp"
+                android:textSize="24sp"
+                android:layout_marginStart="8dp"
                 tools:text="John" />
 
 
