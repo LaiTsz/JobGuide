@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Chat App</string>
+    <string name="app_name">HKUST JobGuide</string>
     <string name="title_chats">Chats</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_home">Home</string>
@@ -49,4 +49,5 @@
     <string name="career_direction">Please select your Career Direction(s): </string>
     <string name="description">Tell more about yourself</string>
     <string name="title_Post">Post</string>
+    <string name="add_a_post">Add a post</string>
 </resources>

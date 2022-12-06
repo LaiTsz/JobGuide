@@ -16,6 +16,7 @@ import com.fredrikbogg.android_chat_app.ui.addPost.AddPostViewModel
 import com.fredrikbogg.android_chat_app.ui.post.PostFragment
 import com.fredrikbogg.android_chat_app.ui.profile.ProfileFragment
 import com.fredrikbogg.android_chat_app.ui.users.UsersListAdapter
+import kotlinx.android.synthetic.main.fragment_forum.*
 
 class ForumFragment : Fragment() {
     private val viewModel by viewModels<ForumViewModel>()
@@ -29,8 +30,11 @@ class ForumFragment : Fragment() {
         setHasOptionsMenu(true)
         return viewDataBinding.root
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        floating_action_button.setOnClickListener{findNavController().navigate(R.id.action_navigation_forum_to_addPost)}
+    }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+   /* override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.forum_toolbar, menu)
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -41,7 +45,7 @@ class ForumFragment : Fragment() {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
+    }*/
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
