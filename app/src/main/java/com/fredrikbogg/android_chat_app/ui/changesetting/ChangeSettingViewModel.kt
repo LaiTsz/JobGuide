@@ -60,7 +60,7 @@ class ChangeSettingViewModel(private val userID: String) :DefaultViewModel() {
     }
 
     fun changeUserCareer(careerList:ArrayList<String>){
-        val separator = " "
+        val separator = " | "
         val career = careerList.joinToString(separator)
         dbRepository.updateUserCareer(userID, career)
     }

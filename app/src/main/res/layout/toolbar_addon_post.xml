@@ -37,9 +37,11 @@
                 android:maxLines="1"
                 android:background="@color/colorPrimary"
                 android:text="@{viewmodel.postInfo.topic}"
+                android:shadowColor="@color/colorPrimary"
                 android:textColor="@android:color/white"
-                android:textSize="24sp"
                 android:layout_marginStart="8dp"
+                android:textSize="24sp"
+
                 tools:text="John" />
 
 
