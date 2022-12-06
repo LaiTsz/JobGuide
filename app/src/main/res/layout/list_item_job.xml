@@ -75,6 +75,9 @@
                     android:textSize="15sp"/>
                 <TextView
                     android:id="@+id/job_Link"
+                    android:autoLink="web"
+                    android:linksClickable="true"
+                    android:textColorLink="#0000EE"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Link: "

@@ -5,6 +5,5 @@
         android:id="@+id/notification_request"
         android:icon="@drawable/ic_baseline_notifications_24"
         android:title="user_request"
-        app:showAsAction="ifRoom"
-        app:actionLayout="@layout/notification_action_item"/>
+        app:showAsAction="ifRoom" />
 </menu>

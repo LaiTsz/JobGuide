@@ -41,8 +41,10 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             app:backgroundTint="@color/colorPrimary"
-            app:fabCustomSize="70dp"
-            app:srcCompat="@drawable/ic_baseline_add_24"
-            android:contentDescription="@string/add_a_post" />
+            app:fabCustomSize="65dp"
+            app:srcCompat="@drawable/ic_baseline_add_32"
+            app:tint="@null"
+            android:contentDescription="@string/add_a_post"
+            />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -1,9 +1,7 @@
 package com.fredrikbogg.android_chat_app.ui.chats
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -22,9 +20,6 @@ class ChatsFragment : Fragment() {
     private val viewModel: ChatsViewModel by viewModels { ChatsViewModelFactory(App.myUserID) }
     private lateinit var viewDataBinding: FragmentChatsBinding
     private lateinit var listAdapter: ChatsListAdapter
-    private lateinit var notificationsBadgeTextView : TextView
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -37,23 +32,7 @@ class ChatsFragment : Fragment() {
     }
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.chats_toolbar, menu)
-        var numberOfNotification:String = "0"
-        Log.e("Menu create",menu.toString())
-        var menuItem = menu.findItem(R.id.notification_request)
-        var actionView = menuItem.actionView
-        notificationsBadgeTextView = actionView!!.findViewById(R.id.notification_badge_text_view)
-        notificationsBadgeTextView.text = numberOfNotification
-        if(numberOfNotification.toInt() == 0){
-            notificationsBadgeTextView.visibility = View.GONE
-        }
-        else {
-            notificationsBadgeTextView.visibility = View.VISIBLE
-        }
-        actionView.setOnClickListener(View.OnClickListener {
-            onOptionsItemSelected(menuItem)
-        })
     }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupListAdapter()

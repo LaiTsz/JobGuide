@@ -208,6 +208,17 @@ class FirebaseDataSource {
         return key
     }
 
+//    fun pushNewJob():String? {
+//        var key = refToPath("Job").push().key
+//        refToPath("/Job/$key/career").setValue(key)
+//        refToPath("/Job/$key/deadline").setValue(key)
+//        refToPath("/Job/$key/link").setValue(key)
+//        refToPath("/Job/$key/profileImageUrl").setValue(key)
+//        refToPath("/Job/$key/salary").setValue(key)
+//        refToPath("/Job/$key/title").setValue(key)
+//        return key
+//    }
+
     fun updateLastComment(postID: String, context: String) {
         refToPath("Posts/$postID/lastComment").setValue(context)
     }

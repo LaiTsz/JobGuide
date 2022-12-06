@@ -2,6 +2,7 @@ package com.fredrikbogg.android_chat_app.ui.home
 
 
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.util.Log
 import android.view.*
 import android.widget.TextView
@@ -51,38 +52,25 @@ class homeFragment : Fragment() {
         talkRecyclerView.hasFixedSize()
         getJobData(jobRecyclerView,jobArrayList,"Job")
         getTalkData(talkRecyclerView,talkArrayList,"Talk")
+
         return view
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        inflater.inflate(R.menu.home_toolbar, menu)
-//        Log.e("Menu create",menu.toString())
-//        var menuItem = menu.findItem(R.id.notification_request)
-//        var actionView = menuItem.actionView
-//        notificationsBadgeTextView = actionView!!.findViewById(R.id.notification_badge_text_view)
-//        notificationsBadgeTextView.text = numberOfNotification
-//        if(numberOfNotification.toInt() == 0){
-//            notificationsBadgeTextView.visibility = View.GONE
-//        }
-//        else {
-//            notificationsBadgeTextView.visibility = View.VISIBLE
-//        }
-//        actionView.setOnClickListener(View.OnClickListener {
-//            onOptionsItemSelected(menuItem)
-//        })
-//    }
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            R.id.notification_request -> {
-//                findNavController().navigate(R.id.action_navigation_home_to_notificationsFragment)
-//                return true
-//            }
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.home_toolbar, menu)
+
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.notification_request -> {
+                findNavController().navigate(R.id.action_navigation_home_to_notificationsFragment)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     private fun getCareer(){
-        Log.e("career value", "enter the get career")
         val dbref = FirebaseDatabase.getInstance().getReference("/users/${App.myUserID}/info/career")
         dbref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot){
@@ -92,10 +80,11 @@ class homeFragment : Fragment() {
                     dataSnapshot.value.toString()
                 }
                 careerList = if(career != null)
-                    career.split(" ")
+                    career.split(" | ")
                 else {
                     emptyList()
                 }
+                Log.e("career value", career)
 
             }
             override fun onCancelled(error: DatabaseError) {
@@ -160,5 +149,6 @@ class homeFragment : Fragment() {
 //            Log.e("numberOfNotification",numberOfNotification)
 //        }
 //    }
+
 
 }

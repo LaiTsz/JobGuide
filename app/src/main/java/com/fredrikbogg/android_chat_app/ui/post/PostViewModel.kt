@@ -68,6 +68,7 @@ class PostViewModel(private val myUserID: String,private val postID: String) : D
             val newComment= displayName?.let { Comment(it, newCommentText.value!!) }
             if (newComment != null) {
                 dbRepository.updateNewComment(postID, newComment)
+                //dbRepository.updateNewJob()
             }
             if (newComment != null) {
                 dbRepository.updatePostLastComment(postID, newComment.context)

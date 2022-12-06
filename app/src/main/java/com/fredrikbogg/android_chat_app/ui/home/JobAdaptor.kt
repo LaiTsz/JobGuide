@@ -22,7 +22,7 @@ class JobAdaptor (
         val item = jobs[position]
         Picasso.get().load(item.profileImageUrl).into(holder.image)
         holder.title.text = item.title
-        holder.deadline.text = "Deadline Application: " + item.deadline
+        holder.deadline.text = "Deadline: " + item.deadline
         holder.salary.text ="Salary: " + item.salary
         holder.link.text ="Link: " + item.link
         val isExpandable :Boolean = jobs[position].expandable

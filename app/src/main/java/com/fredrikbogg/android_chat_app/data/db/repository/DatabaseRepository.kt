@@ -68,6 +68,9 @@ class DatabaseRepository {
     fun updatePostLastComment(postID: String, context: String) {
         firebaseDatabaseService.updateLastComment(postID, context)
     }
+//    fun updateNewJob(): String? {
+//        return firebaseDatabaseService.pushNewJob()
+//    }
 
     //endregion
 
