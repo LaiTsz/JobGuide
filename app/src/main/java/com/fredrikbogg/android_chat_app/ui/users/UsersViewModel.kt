@@ -2,7 +2,6 @@ package com.fredrikbogg.android_chat_app.ui.users
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.fredrikbogg.android_chat_app.App.Companion.myUserID
 import com.fredrikbogg.android_chat_app.data.db.entity.User
 import com.fredrikbogg.android_chat_app.data.db.repository.DatabaseRepository
 import com.fredrikbogg.android_chat_app.ui.DefaultViewModel

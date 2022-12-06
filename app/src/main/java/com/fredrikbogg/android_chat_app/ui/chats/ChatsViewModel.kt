@@ -7,6 +7,7 @@ import com.fredrikbogg.android_chat_app.data.db.entity.Chat
 import com.fredrikbogg.android_chat_app.data.model.ChatWithUserInfo
 import com.fredrikbogg.android_chat_app.data.db.entity.UserFriend
 import com.fredrikbogg.android_chat_app.data.db.entity.UserInfo
+import com.fredrikbogg.android_chat_app.data.db.entity.UserNotification
 import com.fredrikbogg.android_chat_app.data.db.remote.FirebaseReferenceValueObserver
 import com.fredrikbogg.android_chat_app.data.db.repository.DatabaseRepository
 import com.fredrikbogg.android_chat_app.ui.DefaultViewModel
@@ -28,10 +29,11 @@ class ChatsViewModel(val myUserID: String) : DefaultViewModel() {
     private val firebaseReferenceObserverList = ArrayList<FirebaseReferenceValueObserver>()
     private val _updatedChatWithUserInfo = MutableLiveData<ChatWithUserInfo>()
     private val _selectedChat = MutableLiveData<Event<ChatWithUserInfo>>()
-
+    private val _userNotificationsList = MutableLiveData<MutableList<UserNotification>>()
     var selectedChat: LiveData<Event<ChatWithUserInfo>> = _selectedChat
     val chatsList = MediatorLiveData<MutableList<ChatWithUserInfo>>()
-
+    private val fbRefNotificationsObserver = FirebaseReferenceValueObserver()
+    var userNotificationsList: LiveData<MutableList<UserNotification>> = _userNotificationsList
     init {
         chatsList.addSource(_updatedChatWithUserInfo) { newChat ->
             val chat = chatsList.value?.find { it.mChat.info.id == newChat.mChat.info.id }
@@ -42,6 +44,7 @@ class ChatsViewModel(val myUserID: String) : DefaultViewModel() {
             }
         }
         setupChats()
+        observingNotifications()
     }
 
     override fun onCleared() {
@@ -85,5 +88,12 @@ class ChatsViewModel(val myUserID: String) : DefaultViewModel() {
 
     fun selectChatWithUserInfoPressed(chat: ChatWithUserInfo) {
         _selectedChat.value = Event(chat)
+    }
+    private fun observingNotifications() {
+        repository.loadAndObserveUserNotifications(myUserID, fbRefNotificationsObserver) { result: Result<MutableList<UserNotification>> ->
+            if (result is Result.Success) {
+                _userNotificationsList.value = result.data
+            }
+        }
     }
 }

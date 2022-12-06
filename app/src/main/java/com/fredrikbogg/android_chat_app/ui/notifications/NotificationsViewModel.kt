@@ -24,7 +24,6 @@ class NotificationsViewModel(private val myUserID: String) : DefaultViewModel() 
     private val dbRepository: DatabaseRepository = DatabaseRepository()
     private val updatedUserInfo = MutableLiveData<UserInfo>()
     private val userNotificationsList = MutableLiveData<MutableList<UserNotification>>()
-
     val usersInfoList = MediatorLiveData<MutableList<UserInfo>>()
 
     init {

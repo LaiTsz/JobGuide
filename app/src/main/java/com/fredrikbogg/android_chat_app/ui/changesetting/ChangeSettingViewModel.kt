@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.fredrikbogg.android_chat_app.R
 import com.fredrikbogg.android_chat_app.data.Event
 import com.fredrikbogg.android_chat_app.data.Result
 import com.fredrikbogg.android_chat_app.data.db.entity.UserInfo

@@ -1,15 +1,12 @@
 package com.fredrikbogg.android_chat_app.ui.post
 
-import android.util.Log
 import androidx.lifecycle.*
-import com.fredrikbogg.android_chat_app.App.Companion.myUserID
 import com.fredrikbogg.android_chat_app.data.db.remote.FirebaseReferenceChildObserver
 import com.fredrikbogg.android_chat_app.data.db.remote.FirebaseReferenceValueObserver
 import com.fredrikbogg.android_chat_app.data.db.repository.DatabaseRepository
 import com.fredrikbogg.android_chat_app.ui.DefaultViewModel
 import com.fredrikbogg.android_chat_app.data.Result
 import com.fredrikbogg.android_chat_app.data.db.entity.*
-import com.fredrikbogg.android_chat_app.ui.chat.ChatViewModel
 import com.fredrikbogg.android_chat_app.util.addNewItem
 
 class PostViewModelFactory(private val myUserID: String,private val postID: String) :
