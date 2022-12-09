@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.fredrikbogg.android_chat_app.ui.addPost.AddPostViewModel" />
+            type="com.project.job_guide.ui.addPost.AddPostViewModel" />
 
     </data>
     <LinearLayout

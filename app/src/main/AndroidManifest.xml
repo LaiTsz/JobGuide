@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.fredrikbogg.android_chat_app">
+    package="com.project.job_guide">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:name="com.fredrikbogg.android_chat_app.App"
+        android:name="com.project.job_guide.App"
         android:allowBackup="true"
         android:icon="@drawable/hkust_job_logo"
         android:label="@string/app_name"
@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.fredrikbogg.android_chat_app.ui.main.MainActivity"
+            android:name="com.project.job_guide.ui.main.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait">

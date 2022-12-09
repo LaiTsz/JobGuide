@@ -8,7 +8,7 @@
 
         <variable
             name="viewmodel"
-            type="com.fredrikbogg.android_chat_app.ui.start.createAccount.CreateAccountViewModel" />
+            type="com.project.job_guide.ui.start.createAccount.CreateAccountViewModel" />
 
     </data>
 

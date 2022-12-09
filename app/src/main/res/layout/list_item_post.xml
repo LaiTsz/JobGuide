@@ -9,11 +9,11 @@
 
         <variable
             name="viewmodel"
-            type="com.fredrikbogg.android_chat_app.ui.post.PostViewModel" />
+            type="com.project.job_guide.ui.post.PostViewModel" />
 
         <variable
             name="comment"
-            type="com.fredrikbogg.android_chat_app.data.db.entity.Comment" />
+            type="com.project.job_guide.data.db.entity.Comment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

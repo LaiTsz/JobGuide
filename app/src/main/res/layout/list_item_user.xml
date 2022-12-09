@@ -8,11 +8,11 @@
 
         <variable
             name="viewmodel"
-            type="com.fredrikbogg.android_chat_app.ui.users.UsersViewModel" />
+            type="com.project.job_guide.ui.users.UsersViewModel" />
 
         <variable
             name="user"
-            type="com.fredrikbogg.android_chat_app.data.db.entity.User" />
+            type="com.project.job_guide.data.db.entity.User" />
 
     </data>
 

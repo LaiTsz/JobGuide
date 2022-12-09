@@ -10,11 +10,11 @@
 
         <variable
             name="viewmodel"
-            type="com.fredrikbogg.android_chat_app.ui.chats.ChatsViewModel" />
+            type="com.project.job_guide.ui.chats.ChatsViewModel" />
 
         <variable
             name="chatwithuserinfo"
-            type="com.fredrikbogg.android_chat_app.data.model.ChatWithUserInfo" />
+            type="com.project.job_guide.data.model.ChatWithUserInfo" />
 
     </data>
 

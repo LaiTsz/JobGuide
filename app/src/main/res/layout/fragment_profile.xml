@@ -9,11 +9,11 @@
 
         <import type="android.view.View" />
 
-        <import type="com.fredrikbogg.android_chat_app.ui.chats.ChatsViewModel" />
+        <import type="com.project.job_guide.ui.chats.ChatsViewModel" />
 
         <variable
             name="viewmodel"
-            type="com.fredrikbogg.android_chat_app.ui.profile.ProfileViewModel" />
+            type="com.project.job_guide.ui.profile.ProfileViewModel" />
 
     </data>
 
