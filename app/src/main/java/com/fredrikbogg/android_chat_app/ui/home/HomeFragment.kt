@@ -38,20 +38,19 @@ class homeFragment : Fragment() {
 //        setupViewModelObservers()
         getCareer()
         //set RecyclerView
-        val jobLayoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
-        jobRecyclerView = view.findViewById(R.id.rvJob)
-        jobRecyclerView.layoutManager = jobLayoutManager
-        jobRecyclerView.itemAnimator?.changeDuration = 0
-        jobArrayList = arrayListOf()
-        jobRecyclerView.hasFixedSize()
+
         val talkLayoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
         talkRecyclerView = view.findViewById(R.id.rvTalk)
         talkRecyclerView.layoutManager = talkLayoutManager
         talkRecyclerView.itemAnimator?.changeDuration = 0
         talkArrayList = arrayListOf()
         talkRecyclerView.hasFixedSize()
-        getJobData(jobRecyclerView,jobArrayList,"Job")
-        getTalkData(talkRecyclerView,talkArrayList,"Talk")
+        val jobLayoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+        jobRecyclerView = view.findViewById(R.id.rvJob)
+        jobRecyclerView.layoutManager = jobLayoutManager
+        jobRecyclerView.itemAnimator?.changeDuration = 0
+        jobArrayList = arrayListOf()
+        jobRecyclerView.hasFixedSize()
 
         return view
     }
@@ -85,7 +84,8 @@ class homeFragment : Fragment() {
                     emptyList()
                 }
                 Log.e("career value", career)
-
+                getJobData(jobRecyclerView,jobArrayList,"Job")
+                getTalkData(talkRecyclerView,talkArrayList,"Talk")
             }
             override fun onCancelled(error: DatabaseError) {
                 // Failed to read value
